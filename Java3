@@ -1,0 +1,50 @@
+package Prac;
+
+public class PasswordValidator {
+
+    public boolean isValid(String password) {
+
+        if (password.length() >= 5 && password.length() <= 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+
+package Prac;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class TestPassword {
+
+    PasswordValidator pv = new PasswordValidator();
+
+    @Test
+    public void testValidLowerBoundary() {
+        Assert.assertEquals(pv.isValid("abcde"), true);
+    }
+    @Test
+    public void testValidMiddle() {
+        Assert.assertEquals(pv.isValid("abcdefgh"), true);
+    }
+    @Test
+    public void testValidUpperBoundary() {
+        Assert.assertEquals(pv.isValid("abcdefghij"), true);
+    }
+    @Test
+    public void testTooShort() {
+        Assert.assertEquals(pv.isValid("abcd"), false);
+    }
+    @Test
+    public void testTooLong() {
+        Assert.assertEquals(pv.isValid("abcdefghijk"), false);
+    }
+    @Test
+    public void testEmptyString() {
+        Assert.assertEquals(pv.isValid(""), false);
+    }
+}
